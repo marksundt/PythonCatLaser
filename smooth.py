@@ -5,13 +5,16 @@ import time
 
 import pantilthat
 
+pantilthat.light_mode(pantilthat.PWM)
+#pantilthat.light_type(pantilthat.)
+pantilthat.brightness(255)
 
 while True:
     # Get the time in seconds
     t = time.time()
 
     # G enerate an angle using a sine wave (-1 to 1) multiplied by 90 (-90 to 90)
-    a = math.sin(t * 2) * 90
+    a = math.sin(t * 2) * 45
     
     # Cast a to int for v0.0.2
     a = int(a)
