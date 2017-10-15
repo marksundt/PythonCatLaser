@@ -45,7 +45,7 @@ def drawcircle():
         y = 10 * math.sin(math.radians(z))
         pantilthat.pan(x)
         pantilthat.tilt(y)
-        print(z, x, y)
+        #print(z, x, y)
         time.sleep(delay)   
         return
 
@@ -55,4 +55,3 @@ if __name__ == "__main__":
         drawcircle()
         drawlines()
         drawcircle()
-        
