@@ -9,10 +9,10 @@ delay = 0.05
 
 def setup():
     print("Setup")
+    GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(18, GPIO.OUT)  # set up pin 18
     GPIO.output(18, 1)  # turn on pin 18
-    GPIO.setwarnings(False)
     return
 
 def drawlines():
@@ -50,7 +50,7 @@ def drawcircle():
         pantilthat.tilt(y)
         #print(z, x, y)
         time.sleep(delay)   
-        return
+    return
 
 def main():
     setup()
