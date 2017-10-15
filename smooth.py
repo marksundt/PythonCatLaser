@@ -8,12 +8,15 @@ import pantilthat
 delay = 0.05
 
 def setup():
+    print("Setup")
     GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(18, GPIO.OUT)  # set up pin 18
     GPIO.output(18, 1)  # turn on pin 18
     GPIO.setwarnings(False)
+    return
 
 def drawlines():
+    print("Draw Lines")
     pantilthat.tilt(0) 
     x = 60
     # 60 to zero
@@ -39,6 +42,7 @@ def drawlines():
     return
 
 def drawcircle():
+    print("Draw Circle")
     for z in range(0, 360):
         x = 10 * math.cos(math.radians(z))
         y = 10 * math.sin(math.radians(z))
