@@ -15,21 +15,13 @@ GPIO.output(18, 1)  # turn on pin 18
 
 pantilthat.tilt(-70) 
 
-while True:
-    # Get the time in seconds
-    t = time.time()
+for x in range(-60, 60)
 
-    # G enerate an angle using a sine wave (-1 to 1) multiplied by 90 (-90 to 90)
-    a = math.sin(t * 2) * 45
-    
-    # Cast a to int for v0.0.2
-    a = int(a)
-
-    pantilthat.pan(a)
+    pantilthat.pan(x)
 
 
     # Two decimal places is quite enough!
-    print(round(a,2))
+    print(x)
 
     # Sleep for a bit so we're not hammering the HAT with updates
-    time.sleep(0.5)
+    time.sleep(0.05)
