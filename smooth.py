@@ -1,24 +1,21 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 
 import math
 import time
 import RPi.GPIO as GPIO
 import pantilthat
 
-delay = 0.05 
+def setup():
 
-GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
+    delay = 0.05 
 
-GPIO.setup(17, GPIO.OUT)  # set up pin 17
-GPIO.setup(18, GPIO.OUT)  # set up pin 18
+    GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
+    GPIO.setup(18, GPIO.OUT)  # set up pin 18
+    GPIO.output(18, 1)  # turn on pin 18
+    GPIO.setwarnings(False)
 
-GPIO.output(17, 1)  # turn on pin 17
-GPIO.output(18, 1)  # turn on pin 18
-
-pantilthat.tilt(-70) 
-
-
-while True:
+def drawlines():
+    pantilthat.tilt(0) 
     x = 60
     # 60 to zero
     for y in range(0, 60):
@@ -40,3 +37,22 @@ while True:
         pantilthat.pan(x)
         time.sleep(delay)
         x += 1
+    return
+
+def drawcircle():
+    for z in range(0, 360):
+        x = 10 * math.cos(math.radians(z))
+        y = 10 * math.sin(math.radians(z))
+        pantilthat.pan(x)
+        pantilthat.tilt(y)
+        print(z, x, y)
+        time.sleep(delay)   
+        return
+
+if __name__ == "__main__":
+    main()
+        setup()
+        drawcircle()
+        drawlines()
+        drawcircle()
+        
