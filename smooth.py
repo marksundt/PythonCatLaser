@@ -2,7 +2,7 @@
 
 import math
 import time
-import RPI.GPIO as GPIO
+import RPi.GPIO as GPIO
 import pantilthat
 
 GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
