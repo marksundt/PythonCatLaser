@@ -49,9 +49,13 @@ def drawcircle():
         time.sleep(delay)   
         return
 
-if __name__ == "__main__":
-    main()
+
+
+def main()
         setup()
         drawcircle()
         drawlines()
         drawcircle()
+
+if __name__ == "__main__":
+    main()
