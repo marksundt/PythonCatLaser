@@ -5,10 +5,9 @@ import time
 import RPi.GPIO as GPIO
 import pantilthat
 
+delay = 0.05
+
 def setup():
-
-    delay = 0.05 
-
     GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(18, GPIO.OUT)  # set up pin 18
     GPIO.output(18, 1)  # turn on pin 18
@@ -49,13 +48,11 @@ def drawcircle():
         time.sleep(delay)   
         return
 
-
-
-def main()
-        setup()
-        drawcircle()
-        drawlines()
-        drawcircle()
+def main():
+    setup()
+    drawcircle()
+    drawlines()
+    drawcircle()
 
 if __name__ == "__main__":
     main()
