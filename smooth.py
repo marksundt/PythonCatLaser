@@ -15,6 +15,11 @@ def setup():
     GPIO.output(18, 1)  # turn on pin 18
     return
 
+def shutdown():
+    GPIO.output(18, 1)  # turn off pin 18 laser
+    GPIO.cleanup()
+    return
+
 def drawlines():
     print("Draw Lines")
     pantilthat.tilt(0) 
@@ -54,9 +59,13 @@ def drawcircle():
 
 def main():
     setup()
-    drawcircle()
-    drawlines()
-    drawcircle()
+
+    for i in range(1, 20):
+        drawcircle()
+        drawlines()
+    
+    shutdown()
+    return
 
 if __name__ == "__main__":
     main()
