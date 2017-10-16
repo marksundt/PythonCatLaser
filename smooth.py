@@ -7,7 +7,7 @@ import RPi.GPIO as GPIO
 import pantilthat
 
 Delay = 0.05
-Top = 70
+Top = 65
 
 def setup():
     """Setup for GPIO and LED fuctions"""
