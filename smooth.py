@@ -51,7 +51,7 @@ def drawlinesdown():
         time.sleep(Delay)
         x += 1
     # zero to 60
-    for y in range(0, 20):
+    for y in range(0, 60):
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
