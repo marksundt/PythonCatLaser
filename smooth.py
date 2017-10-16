@@ -59,7 +59,7 @@ def drawlinesdown():
 
 def drawcircle(offset=0):
     """Draw a circle from cos / sin - need offset"""
-    print("Draw Circle")
+    print("Draw Circle", offset)
     for z in range(0, 360):
         x = offset+(8 * math.cos(math.radians(z)))
         y = 8 * math.sin(math.radians(z))
