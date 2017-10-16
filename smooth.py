@@ -7,6 +7,7 @@ import RPi.GPIO as GPIO
 import pantilthat
 
 Delay = 0.05
+Top = 70
 
 def setup():
     """Setup for GPIO and LED fuctions"""
@@ -27,9 +28,9 @@ def drawlinesup():
     """Draws a line on tilt from 80 to -20 up steps"""
     print("Draw Lines Up")
     pantilthat.tilt(0)
-    x = 80
+    x = Top
     # 80 to zero
-    for y in range(0, 80):
+    for y in range(0, Top):
         pantilthat.pan(x)
         time.sleep(Delay)
         x -= 1
@@ -51,7 +52,7 @@ def drawlinesdown():
         time.sleep(Delay)
         x += 1
     # zero to 80
-    for y in range(0, 80):
+    for y in range(0, Top):
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
@@ -74,7 +75,7 @@ def main():
     setup()
 
     for i in range(1, 20):
-        drawcircle(80)
+        drawcircle(Top)
         drawlinesup()
         drawcircle(-20)
         drawlinesdown()
