@@ -24,16 +24,16 @@ def shutdown():
     return
 
 def drawlinesup():
-    """Draws a line on tilt from 60 to -60 up steps"""
+    """Draws a line on tilt from 80 to -20 up steps"""
     print("Draw Lines Up")
     pantilthat.tilt(0)
-    x = 60
-    # 60 to zero
-    for y in range(0, 60):
+    x = 80
+    # 80 to zero
+    for y in range(0, 80):
         pantilthat.pan(x)
         time.sleep(Delay)
         x -= 1
-    # zero to -60
+    # zero to -20
     for y in range(0, 20):
         pantilthat.pan(x)
         time.sleep(Delay)
@@ -50,8 +50,8 @@ def drawlinesdown():
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
-    # zero to 60
-    for y in range(0, 60):
+    # zero to 80
+    for y in range(0, 80):
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
@@ -74,7 +74,7 @@ def main():
     setup()
 
     for i in range(1, 20):
-        drawcircle(60)
+        drawcircle(80)
         drawlinesup()
         drawcircle(-20)
         drawlinesdown()
