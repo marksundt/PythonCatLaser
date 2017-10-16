@@ -24,7 +24,7 @@ def shutdown():
     return
 
 def drawlinesup():
-    """Draws a line on tilt from 60 to -60"""
+    """Draws a line on tilt from 60 to -60 up steps"""
     print("Draw Lines")
     pantilthat.tilt(0)
     x = 60
@@ -34,24 +34,24 @@ def drawlinesup():
         time.sleep(Delay)
         x -= 1
     # zero to -60
-    for y in range(0, 60):
+    for y in range(0, 20):
         pantilthat.pan(x)
         time.sleep(Delay)
         x -= 1
     return
 
 def drawlinesdown():
-    """Draws a line on tilt from -60 to 60"""
+    """Draws a line on tilt from -60 to 60 down steps"""
     print("Draw Lines")
     pantilthat.tilt(0)
-    x = -60
+    x = -20
     # -60 to zero
-    for y in range(0, 60):
+    for y in range(0, 20):
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
     # zero to 60
-    for y in range(0, 60):
+    for y in range(0, 20):
         pantilthat.pan(x)
         time.sleep(Delay)
         x += 1
@@ -61,8 +61,8 @@ def drawcircle(offset=0):
     """Draw a circle from cos / sin - need offset"""
     print("Draw Circle")
     for z in range(0, 360):
-        x = offset+(10 * math.cos(math.radians(z)))
-        y = 10 * math.sin(math.radians(z))
+        x = offset+(8 * math.cos(math.radians(z)))
+        y = 8 * math.sin(math.radians(z))
         pantilthat.pan(x)
         pantilthat.tilt(y)
         #print(z, x, y)
