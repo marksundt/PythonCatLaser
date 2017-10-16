@@ -6,8 +6,8 @@ import time
 import RPi.GPIO as GPIO
 import pantilthat
 
-Delay = 0.05
-Top = 65
+DELAY = 0.05
+TOP = 65
 
 def setup():
     """Setup for GPIO and LED fuctions"""
@@ -28,54 +28,56 @@ def drawlinesup():
     """Draws a line on tilt from 80 to -20 up steps"""
     print("Draw Lines Up")
     pantilthat.tilt(0)
-    x = Top
-    # 80 to zero
-    for y in range(0, Top):
-        pantilthat.pan(x)
-        time.sleep(Delay)
-        x -= 1
+    pan_deg = TOP
+    # zero to top where circle should start
+    # I hate that I couldnt do list(range(0,-20))
+    for pan_steps in range(0, TOP):
+        pantilthat.pan(pan_deg)
+        time.sleep(DELAY)
+        pan_deg -= 1
     # zero to -20
-    for y in range(0, 20):
-        pantilthat.pan(x)
-        time.sleep(Delay)
-        x -= 1
+    for pan_steps in range(0, 20):
+        pantilthat.pan(pan_deg)
+        time.sleep(DELAY)
+        pan_deg -= 1
     return
 
 def drawlinesdown():
     """Draws a line on tilt from -60 to 60 down steps"""
     print("Draw Lines Down")
     pantilthat.tilt(0)
-    x = -20
+    pan_deg = -20
     # -60 to zero
-    for y in range(0, 20):
-        pantilthat.pan(x)
-        time.sleep(Delay)
-        x += 1
+        # I hate that I couldnt do list(range(-20,0)) - No step function
+    for pan_steps in range(0, 20):
+        pantilthat.pan(pan_deg)
+        time.sleep(DELAY)
+        pan_deg += 1
     # zero to 80
-    for y in range(0, Top):
-        pantilthat.pan(x)
-        time.sleep(Delay)
-        x += 1
+    for pan_steps in range(0, TOP):
+        pantilthat.pan(pan_deg)
+        time.sleep(DELAY)
+        pan_deg += 1
     return
 
 def drawcircle(offset=0):
     """Draw a circle from cos / sin - need offset"""
     print("Draw Circle", offset)
-    for z in range(0, 360):
-        x = offset+(8 * math.cos(math.radians(z)))
-        y = 8 * math.sin(math.radians(z))
-        pantilthat.pan(x)
-        pantilthat.tilt(y)
+    for servo_steps in range(0, 360):
+        x_cart = offset+(8 * math.cos(math.radians(servo_steps)))
+        y_cart = 8 * math.sin(math.radians(servo_steps))
+        pantilthat.pan(x_cart)
+        pantilthat.tilt(y_cart)
         #print(z, x, y)
-        time.sleep(Delay)
+        time.sleep(DELAY)
     return
 
 def main():
     """ Main """
     setup()
 
-    for i in range(1, 20):
-        drawcircle(Top)
+    for laser_laps in range(1, 20):
+        drawcircle(TOP)
         drawlinesup()
         drawcircle(-20)
         drawlinesdown()
