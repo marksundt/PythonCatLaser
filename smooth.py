@@ -25,7 +25,7 @@ def shutdown():
 
 def drawlinesup():
     """Draws a line on tilt from 60 to -60 up steps"""
-    print("Draw Lines")
+    print("Draw Lines Up")
     pantilthat.tilt(0)
     x = 60
     # 60 to zero
@@ -34,7 +34,7 @@ def drawlinesup():
         time.sleep(Delay)
         x -= 1
     # zero to -60
-    for y in range(0, 20):
+    for y in range(0, 60):
         pantilthat.pan(x)
         time.sleep(Delay)
         x -= 1
@@ -42,7 +42,7 @@ def drawlinesup():
 
 def drawlinesdown():
     """Draws a line on tilt from -60 to 60 down steps"""
-    print("Draw Lines")
+    print("Draw Lines Down")
     pantilthat.tilt(0)
     x = -20
     # -60 to zero
