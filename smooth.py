@@ -76,7 +76,7 @@ def main():
     for i in range(1, 20):
         drawcircle(60)
         drawlinesup()
-        drawcircle(-60)
+        drawcircle(-20)
         drawlinesdown()
     shutdown()
     return
