@@ -20,7 +20,7 @@ def setup():
 
 def shutdown():
     """Clean up GPIO"""
-    GPIO.output(18, 1)  # turn off pin 18 laser
+    GPIO.output(18, 0)  # turn off pin 18 laser
     GPIO.cleanup()
     return
 
