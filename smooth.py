@@ -6,11 +6,13 @@ import time
 import RPi.GPIO as GPIO
 import pantilthat
 
+#Zero is the bottom
 DELAY = 0.05
-PANTOP = 50
-PANDOWN = 65
-BOTTOM = -20
 TILT = 10
+PANLEFT = 75
+PANRIGHT = -10
+
+
 
 def setup():
     """Setup for GPIO and LED fuctions"""
@@ -27,44 +29,14 @@ def shutdown():
     GPIO.cleanup()
     return
 
-def drawlinesdown():
-    """Draws a line on tilt from 80 to -20 up steps"""
-    #print("Draw Lines Down")
+def drawline(panright=0, panleft=0, step=0):
+    """Draws a line panning right left, left right"""
+    #print("Draw Lines")
     pantilthat.tilt(TILT)
-    pan_deg = PANDOWN
-    # zero to top where circle should start
-    # I hate that I couldnt do list(range(0,-20))
-    for pan_steps in range(0, 20):
+    for pan_deg in range(panright, panleft, step):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
-        pan_deg -= 1
-        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
-    # zero to -20
-    for pan_steps in range(0, 20):
-        pantilthat.pan(pan_deg)
-        time.sleep(DELAY)
-        pan_deg -= 1
-        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
-    return
-
-def drawlinesup():
-    """Draws a line on tilt from -60 to 60 down steps"""
-    #print("Draw Lines Down")
-    pantilthat.tilt(TILT)
-    pan_deg = -20
-    # -60 to zero
-    # I hate that I couldnt do list(range(-20,0)) - No step function
-    for pan_steps in range(0, 20):
-        pantilthat.pan(pan_deg)
-        time.sleep(DELAY)
-        pan_deg += 1
-        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
-    # zero to 80
-    for pan_steps in range(0, 20):
-        pantilthat.pan(pan_deg)
-        time.sleep(DELAY)
-        pan_deg += 1
-        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
+        print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
 def drawcircle(offset=0):
@@ -83,12 +55,13 @@ def drawcircle(offset=0):
 def main():
     """ Main """
     setup()
-
     for laser_laps in range(1, 20):
-        drawcircle(TOP)
-        drawlinesup()
-        drawcircle(BOTTOM)
-        drawlinesdown()
+        drawcircle(PANRIGHT)
+        # Draw line up steps PANRIGHT to PANLEFT going positive facing out
+        drawline(PANRIGHT, PANLEFT, 1)
+        drawcircle(PANLEFT)
+        # Draw line down steps PANLEFT to PANRIGHT going negitive facing out
+        drawline(PANLEFT, PANRIGHT, -1)
     shutdown()
     return
 
