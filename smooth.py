@@ -53,7 +53,7 @@ def main():
     """ Main """
     if len(sys.argv) > 1:
         laser_laps = int(sys.argv[1])
-        print("Laser Laps = %d" % (sys.argv[1]))
+        print("Laser Laps = %d" % (laser_laps))
     else:
         laser_laps = 20
 
