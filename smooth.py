@@ -7,7 +7,8 @@ import RPi.GPIO as GPIO
 import pantilthat
 
 DELAY = 0.05
-TOP = 65
+PANTOP = 50
+PANDOWN = 65
 BOTTOM = -20
 TILT = 10
 
@@ -26,27 +27,27 @@ def shutdown():
     GPIO.cleanup()
     return
 
-def drawlinesup():
+def drawlinesdown():
     """Draws a line on tilt from 80 to -20 up steps"""
-    #print("Draw Lines Up")
+    #print("Draw Lines Down")
     pantilthat.tilt(TILT)
-    pan_deg = TOP
+    pan_deg = PANDOWN
     # zero to top where circle should start
     # I hate that I couldnt do list(range(0,-20))
-    for pan_steps in range(0, TOP):
+    for pan_steps in range(0, 20):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg -= 1
-        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
+        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
     # zero to -20
     for pan_steps in range(0, 20):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg -= 1
-        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
+        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
-def drawlinesdown():
+def drawlinesup():
     """Draws a line on tilt from -60 to 60 down steps"""
     #print("Draw Lines Down")
     pantilthat.tilt(TILT)
@@ -57,13 +58,13 @@ def drawlinesdown():
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg += 1
-        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
+        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
     # zero to 80
-    for pan_steps in range(0, TOP):
+    for pan_steps in range(0, 20):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg += 1
-        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
+        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
 def drawcircle(offset=0):
