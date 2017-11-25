@@ -35,7 +35,7 @@ def drawline(panright=0, panleft=0, step=0):
     pantilthat.tilt(TILT)
     for pan_deg in range(panright, panleft, step):
         pantilthat.pan(pan_deg)
-        time.sleep(DELAY)
+        time.sleep(0.10)
         print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
@@ -46,7 +46,7 @@ def drawcircle(offset=0):
         x_cart = offset+(8 * math.cos(math.radians(servo_steps)))
         y_cart = 8 * math.sin(math.radians(servo_steps))
         pantilthat.pan(x_cart)
-        pantilthat.tilt(y_cart)
+        pantilthat.tilt(y_cart + TILT)
         #print(z, x, y)
         time.sleep(DELAY)
         print("Circle TILT=%d, PAN=%d" % (y_cart, x_cart))
