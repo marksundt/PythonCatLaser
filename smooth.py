@@ -62,8 +62,10 @@ def main():
         drawcircle(PANRIGHT, 0, 360, 2)
         # Draw line up steps PANRIGHT to PANLEFT going positive facing out
         drawline(PANRIGHT + PANOFFSET, PANLEFT - PANOFFSET, 1)
+        # Start circle at bottom of arch end at top
         drawcircle(PANLEFT, 180, 360, 2)
-        drawcircle(PANLEFT, 360, 180, -2)
+        # Finish circle from top to bottom to connect to line
+        drawcircle(PANLEFT, 0, 180, 2)
         # Draw line down steps PANLEFT to PANRIGHT going negitive facing out
         drawline(PANLEFT - PANOFFSET, PANRIGHT + PANOFFSET, -1)
     shutdown()
