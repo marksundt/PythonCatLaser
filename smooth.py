@@ -9,7 +9,7 @@ import pantilthat
 DELAY = 0.05
 TOP = 65
 BOTTOM = -20
-TILT = 20
+TILT = 10
 
 def setup():
     """Setup for GPIO and LED fuctions"""
