@@ -39,12 +39,12 @@ def drawline(panright=0, panleft=0, step=0):
         print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
-def drawcircle(offset=0):
-    """Draw a circle from cos / sin - need offset"""
+def drawcircle(offset=0, start=0, stop=360, step=2):
+    """Draw a circle from cos / sin """
     #print("Draw Circle", offset)
-    for servo_steps in range(0, 360):
-        x_cart = offset+(8 * math.cos(math.radians(servo_steps)))
-        y_cart = 8 * math.sin(math.radians(servo_steps))
+    for servo_deg in range(start, stop, step):
+        x_cart = offset+(8 * math.cos(math.radians(servo_deg)))
+        y_cart = 8 * math.sin(math.radians(servo_deg))
         pantilthat.pan(x_cart)
         pantilthat.tilt(y_cart + TILT)
         #print(z, x, y)
@@ -56,10 +56,11 @@ def main():
     """ Main """
     setup()
     for laser_laps in range(1, 20):
-        drawcircle(PANRIGHT)
+        drawcircle(PANRIGHT, 0, 360, 2)
         # Draw line up steps PANRIGHT to PANLEFT going positive facing out
         drawline(PANRIGHT, PANLEFT, 1)
-        drawcircle(PANLEFT)
+        drawcircle(PANLEFT, 180, 360, 2)
+        drawcircle(PANLEFT, 360, 180, -2)
         # Draw line down steps PANLEFT to PANRIGHT going negitive facing out
         drawline(PANLEFT, PANRIGHT, -1)
     shutdown()
