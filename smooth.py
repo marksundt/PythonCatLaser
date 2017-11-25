@@ -11,7 +11,8 @@ DELAY = 0.05
 TILT = 10
 PANLEFT = 75
 PANRIGHT = -10
-
+# Start / Stop line to join circle
+PANOFFSET = 7
 
 
 def setup():
@@ -29,11 +30,11 @@ def shutdown():
     GPIO.cleanup()
     return
 
-def drawline(offset=0, panright=0, panleft=0, step=0):
+def drawline(panright=0, panleft=0, step=0):
     """Draws a line panning right left, left right offset starts line at circle"""
     #print("Draw Lines")
     pantilthat.tilt(TILT)
-    for pan_deg in range(panright - offset, panleft, step):
+    for pan_deg in range(panright, panleft, step):
         pantilthat.pan(pan_deg)
         time.sleep(0.10)
         print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
@@ -58,11 +59,11 @@ def main():
     for laser_laps in range(1, 20):
         drawcircle(PANRIGHT, 0, 360, 2)
         # Draw line up steps PANRIGHT to PANLEFT going positive facing out
-        drawline(-7, PANRIGHT, PANLEFT, 1)
+        drawline(PANRIGHT + PANOFFSET, PANLEFT - PANOFFSET, 1)
         drawcircle(PANLEFT, 180, 360, 2)
         drawcircle(PANLEFT, 360, 180, -2)
         # Draw line down steps PANLEFT to PANRIGHT going negitive facing out
-        drawline(7, PANLEFT, PANRIGHT, -1)
+        drawline(PANLEFT - PANOFFSET, PANRIGHT + PANOFFSET, -1)
     shutdown()
     return
 
