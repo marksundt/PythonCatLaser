@@ -28,7 +28,7 @@ def shutdown():
 
 def drawlinesup():
     """Draws a line on tilt from 80 to -20 up steps"""
-    print("Draw Lines Up")
+    #print("Draw Lines Up")
     pantilthat.tilt(TILT)
     pan_deg = TOP
     # zero to top where circle should start
@@ -37,34 +37,38 @@ def drawlinesup():
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg -= 1
+        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
     # zero to -20
     for pan_steps in range(0, 20):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg -= 1
+        print("LineUp TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
 def drawlinesdown():
     """Draws a line on tilt from -60 to 60 down steps"""
-    print("Draw Lines Down")
+    #print("Draw Lines Down")
     pantilthat.tilt(TILT)
     pan_deg = -20
     # -60 to zero
-        # I hate that I couldnt do list(range(-20,0)) - No step function
+    # I hate that I couldnt do list(range(-20,0)) - No step function
     for pan_steps in range(0, 20):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg += 1
+        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
     # zero to 80
     for pan_steps in range(0, TOP):
         pantilthat.pan(pan_deg)
         time.sleep(DELAY)
         pan_deg += 1
+        print("LineDn TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
 def drawcircle(offset=0):
     """Draw a circle from cos / sin - need offset"""
-    print("Draw Circle", offset)
+    #print("Draw Circle", offset)
     for servo_steps in range(0, 360):
         x_cart = offset+(8 * math.cos(math.radians(servo_steps)))
         y_cart = 8 * math.sin(math.radians(servo_steps))
@@ -72,6 +76,7 @@ def drawcircle(offset=0):
         pantilthat.tilt(y_cart)
         #print(z, x, y)
         time.sleep(DELAY)
+        print("Circle TILT=%d, PAN=%d" % (y_cart, x_cart))
     return
 
 def main():
