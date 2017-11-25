@@ -58,11 +58,11 @@ def main():
     for laser_laps in range(1, 20):
         drawcircle(PANRIGHT, 0, 360, 2)
         # Draw line up steps PANRIGHT to PANLEFT going positive facing out
-        drawline(7, PANRIGHT, PANLEFT, 1)
+        drawline(-7, PANRIGHT, PANLEFT, 1)
         drawcircle(PANLEFT, 180, 360, 2)
         drawcircle(PANLEFT, 360, 180, -2)
         # Draw line down steps PANLEFT to PANRIGHT going negitive facing out
-        drawline(-7, PANLEFT, PANRIGHT, -1)
+        drawline(7, PANLEFT, PANRIGHT, -1)
     shutdown()
     return
 
