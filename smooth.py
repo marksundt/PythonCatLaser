@@ -1,10 +1,11 @@
 """My Cat Laser Pythong"""
 #!/usr/bin/python3
-
+import sys
 import math
 import time
 import RPi.GPIO as GPIO
 import pantilthat
+
 
 #Zero is the bottom
 DELAY = 0.05
@@ -14,10 +15,8 @@ PANRIGHT = -10
 # Start / Stop line to join circle
 PANOFFSET = 7
 
-
 def setup():
     """Setup for GPIO and LED fuctions"""
-    print("Setup")
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BCM)  # set board mode to Broadcom
     GPIO.setup(18, GPIO.OUT)  # set up pin 18
@@ -32,31 +31,34 @@ def shutdown():
 
 def drawline(panright=0, panleft=0, step=0):
     """Draws a line panning right left, left right offset starts line at circle"""
-    #print("Draw Lines")
     pantilthat.tilt(TILT)
     for pan_deg in range(panright, panleft, step):
         pantilthat.pan(pan_deg)
         time.sleep(0.10)
-        print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
+        #print("Line TILT=%d, PAN=%d" % (TILT, pan_deg))
     return
 
-def drawcircle(offset=0, start=0, stop=360, step=2):
+def drawcircle(panoffset=0, start=0, stop=360, step=2):
     """Draw a circle from cos / sin """
-    #print("Draw Circle", offset)
     for servo_deg in range(start, stop, step):
-        x_cart = offset+(8 * math.cos(math.radians(servo_deg)))
+        x_cart = panoffset+(8 * math.cos(math.radians(servo_deg)))
         y_cart = 8 * math.sin(math.radians(servo_deg))
         pantilthat.pan(x_cart)
         pantilthat.tilt(y_cart + TILT)
-        #print(z, x, y)
         time.sleep(DELAY)
-        print("Circle TILT=%d, PAN=%d" % (y_cart + TILT, x_cart))
+        #print("Circle TILT=%d, PAN=%d" % (y_cart + TILT, x_cart))
     return
 
 def main():
     """ Main """
+    if len(sys.argv) > 1:
+        laser_laps = int(sys.argv[1])
+        print("Laser Laps = %d" % (sys.argv[1]))
+    else:
+        laser_laps = 20
+
     setup()
-    for laser_laps in range(1, 20):
+    for x in range(laser_laps):
         drawcircle(PANRIGHT, 0, 360, 2)
         # Draw line up steps PANRIGHT to PANLEFT going positive facing out
         drawline(PANRIGHT + PANOFFSET, PANLEFT - PANOFFSET, 1)
