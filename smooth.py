@@ -8,6 +8,8 @@ import pantilthat
 
 DELAY = 0.05
 TOP = 65
+BOTTOM = -20
+TILT = -10
 
 def setup():
     """Setup for GPIO and LED fuctions"""
@@ -27,7 +29,7 @@ def shutdown():
 def drawlinesup():
     """Draws a line on tilt from 80 to -20 up steps"""
     print("Draw Lines Up")
-    pantilthat.tilt(0)
+    pantilthat.tilt(TILT)
     pan_deg = TOP
     # zero to top where circle should start
     # I hate that I couldnt do list(range(0,-20))
@@ -45,7 +47,7 @@ def drawlinesup():
 def drawlinesdown():
     """Draws a line on tilt from -60 to 60 down steps"""
     print("Draw Lines Down")
-    pantilthat.tilt(0)
+    pantilthat.tilt(TILT)
     pan_deg = -20
     # -60 to zero
         # I hate that I couldnt do list(range(-20,0)) - No step function
@@ -79,7 +81,7 @@ def main():
     for laser_laps in range(1, 20):
         drawcircle(TOP)
         drawlinesup()
-        drawcircle(-20)
+        drawcircle(BOTTOM)
         drawlinesdown()
     shutdown()
     return
